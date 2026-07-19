@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+/* Playfair Display (accent serif) + Manrope (body) — Cyrillic-capable stand-ins
+   for PP Mondwest / PP Neue Montreal from the reference design. Loaded in index.html. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #fff;
+  color: #051a24;
+}
+
+/* Serif accent font (replaces PP Mondwest) */
+.font-accent {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+/* Scroll-triggered entrance */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* Infinite image marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Duration is set from React via --marquee-duration so the speed
+   stays constant regardless of how many photos are in the strip. */
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+}
+
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation-duration: calc(var(--marquee-duration, 30s) / 3);
+  }
+}
+
+/* Mouse-trail thumbnails in the partner section */
+@keyframes trail-out {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(var(--rot, 0deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6) rotate(var(--rot, 0deg));
+  }
+}
+
+.animate-trail-out {
+  animation: trail-out 1s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee,
+  .animate-fade-in-up,
+  .animate-trail-out {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
