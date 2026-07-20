@@ -78,7 +78,8 @@ body {
     scroll-behavior: auto;
   }
 
-  .animate-marquee,
+  /* The photo marquee is the main visual — keep it scrolling even when the
+     device asks to reduce motion. Entrance/trail effects still respect it. */
   .animate-fade-in-up,
   .animate-trail-out {
     animation: none;
