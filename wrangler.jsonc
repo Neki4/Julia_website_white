@@ -2,7 +2,7 @@
   // Cloudflare Workers config for an assets-only (static) site.
   // `npm run build` outputs to ./dist, and `npx wrangler deploy`
   // serves that folder — no server-side Worker code needed.
-  "name": "footographweb",
+  "name": "juliaweb",
   "compatibility_date": "2025-06-05",
   "assets": {
     "directory": "./dist",
