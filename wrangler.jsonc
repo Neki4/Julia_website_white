@@ -1,0 +1,12 @@
+{
+  // Cloudflare Workers config for an assets-only (static) site.
+  // `npm run build` outputs to ./dist, and `npx wrangler deploy`
+  // serves that folder — no server-side Worker code needed.
+  "name": "footographweb",
+  "compatibility_date": "2025-06-05",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html for unknown paths (safe for this single-page site)
+    "not_found_handling": "single-page-application"
+  }
+}
