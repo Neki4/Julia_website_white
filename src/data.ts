@@ -82,7 +82,7 @@ export const packages: ServicePackage[] = [
     galleryId: 'pack1',
     name: 'Індивідуальна',
     desc: 'Портретна зйомка для однієї людини.',
-    price: '4 000 грн',
+    price: '3 500 грн',
     priceNote: 'за 1 годину зйомки',
     features: [
       'Допомога в підборі локації',
