@@ -102,15 +102,16 @@ export default function TestimonialCarousel() {
             <button
               key={i}
               onClick={() => setZoomed(src)}
-              className="shrink-0 bg-white rounded-[32px] shadow-[0_4px_16px_rgba(0,0,0,0.08)] p-3 cursor-zoom-in"
+              className="shrink-0 self-start bg-white rounded-[32px] shadow-[0_4px_16px_rgba(0,0,0,0.08)] p-3 cursor-zoom-in"
               style={{ width: `${cardW}px` }}
               aria-label={`Збільшити відгук ${(i % reviewImages.length) + 1}`}
             >
+              {/* Full screenshot, never cropped */}
               <img
                 src={src}
                 alt={`Скріншот відгуку клієнта ${(i % reviewImages.length) + 1}`}
                 loading="lazy"
-                className="w-full h-[440px] object-cover object-top rounded-3xl"
+                className="w-full h-auto rounded-3xl"
               />
             </button>
           ))}
