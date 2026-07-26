@@ -25,7 +25,7 @@ function Hero() {
         <img
           src="/hero-bg.jpg"
           alt=""
-          className="w-full h-full object-cover object-top opacity-[0.32]"
+          className="w-full h-full object-cover object-top opacity-[0.64]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/45 via-white/20 to-white/70" />
       </div>
