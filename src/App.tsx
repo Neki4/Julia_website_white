@@ -16,7 +16,21 @@ function Hero() {
   const anim = inView ? 'animate-fade-in-up' : 'opacity-0'
 
   return (
-    <section ref={ref} className="mx-auto max-w-[440px] px-6 pt-12 md:pt-16">
+    <section
+      ref={ref}
+      className="relative mx-auto max-w-[440px] px-6 pt-12 md:pt-16 overflow-hidden"
+    >
+      {/* Faint portrait of the photographer behind the intro text */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <img
+          src="/hero-bg.jpg"
+          alt=""
+          className="w-full h-full object-cover object-top opacity-[0.16]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/30 to-white/80" />
+      </div>
+
+      <div className="relative z-10">
       <h1
         className={`font-accent text-[32px] md:text-[40px] lg:text-[44px] font-semibold text-[#051A24] tracking-tight mb-4 ${anim}`}
         style={{ animationDelay: '0.1s' }}
@@ -87,6 +101,7 @@ function Hero() {
         <Button href="#projects" variant="secondary">
           Дивитися роботи
         </Button>
+      </div>
       </div>
     </section>
   )
