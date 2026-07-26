@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useInViewAnimation } from '../hooks/useInViewAnimation'
 import { galleries, galleryImages } from '../data'
@@ -29,15 +29,32 @@ function PackageCarousel({
   const images = galleryImages(packId)
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
+  const touchStartX = useRef<number | null>(null)
+
+  const next = () => setIndex((i) => (i + 1) % images.length)
+  const prev = () => setIndex((i) => (i - 1 + images.length) % images.length)
 
   useEffect(() => {
     if (paused) return
-    const t = window.setInterval(
-      () => setIndex((i) => (i + 1) % images.length),
-      3500,
-    )
+    const t = window.setInterval(() => next(), 3500)
     return () => window.clearInterval(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paused, images.length])
+
+  // Swipe to change photos on touch devices
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    setPaused(true)
+  }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStartX.current
+    touchStartX.current = null
+    setPaused(false)
+    if (start === null) return
+    const dx = e.changedTouches[0].clientX - start
+    if (dx <= -40) next()
+    else if (dx >= 40) prev()
+  }
 
   const pad = (n: number) => String(n).padStart(2, '0')
 
@@ -46,6 +63,8 @@ function PackageCarousel({
       className="relative overflow-hidden rounded-2xl shadow-lg aspect-[4/5] md:aspect-[16/9] bg-[#F4F1EA] group"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
       <div
         className="flex h-full transition-transform duration-500 ease-out"
@@ -92,15 +111,15 @@ function PackageCarousel({
       {/* arrows */}
       <button
         aria-label="Попереднє фото"
-        onClick={() => setIndex((i) => (i - 1 + images.length) % images.length)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+        onClick={prev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 backdrop-blur flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
       >
         <ChevronLeft className="w-5 h-5 text-[#0D212C]" />
       </button>
       <button
         aria-label="Наступне фото"
-        onClick={() => setIndex((i) => (i + 1) % images.length)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+        onClick={next}
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 backdrop-blur flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
       >
         <ChevronRight className="w-5 h-5 text-[#0D212C]" />
       </button>
