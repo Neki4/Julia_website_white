@@ -34,7 +34,7 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
             src={pack.bgImage}
             alt=""
             loading="lazy"
-            className="w-full h-full object-cover object-top opacity-[0.14]"
+            className="w-full h-full object-cover object-top opacity-[0.28]"
           />
           <div
             className={`absolute inset-0 ${
