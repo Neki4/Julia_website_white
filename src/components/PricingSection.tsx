@@ -19,11 +19,34 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
       style={{ animationDelay: delay }}
     >
       {pack.featured && (
-        <span className="absolute -top-3 left-10 rounded-full bg-[#051A24] px-4 py-1 text-xs font-semibold uppercase tracking-wide text-[#F6FCFF] shadow-[0_0_0_0.5px_rgba(0,0,0,0.05),0_4px_16px_rgba(0,0,0,0.15)]">
+        <span className="absolute z-20 -top-3 left-10 rounded-full bg-[#051A24] px-4 py-1 text-xs font-semibold uppercase tracking-wide text-[#F6FCFF] shadow-[0_0_0_0.5px_rgba(0,0,0,0.05),0_4px_16px_rgba(0,0,0,0.15)]">
           Найпопулярніший
         </span>
       )}
 
+      {/* Very faint package photo behind the card content */}
+      {pack.bgImage && (
+        <div
+          className="pointer-events-none absolute inset-0 overflow-hidden rounded-[40px]"
+          aria-hidden="true"
+        >
+          <img
+            src={pack.bgImage}
+            alt=""
+            loading="lazy"
+            className="w-full h-full object-cover object-top opacity-[0.14]"
+          />
+          <div
+            className={`absolute inset-0 ${
+              dark
+                ? 'bg-gradient-to-b from-[#051A24]/45 via-[#051A24]/35 to-[#051A24]/55'
+                : 'bg-gradient-to-b from-white/45 via-white/35 to-white/55'
+            }`}
+          />
+        </div>
+      )}
+
+      <div className="relative z-10 flex flex-col flex-1">
       <h3
         className={`text-[22px] font-medium ${dark ? 'text-[#F6FCFF]' : 'text-[#0D212C]'}`}
       >
@@ -73,6 +96,7 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
         >
           Дивитись фото
         </Button>
+      </div>
       </div>
     </div>
   )

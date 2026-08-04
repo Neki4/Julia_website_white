@@ -74,6 +74,8 @@ export interface ServicePackage {
   priceNote: string
   features: string[]
   featured?: boolean
+  /** Faint photo shown behind the pricing card text */
+  bgImage?: string
 }
 
 export const packages: ServicePackage[] = [
@@ -84,6 +86,7 @@ export const packages: ServicePackage[] = [
     desc: 'Портретна зйомка для однієї людини.',
     price: '3 500 грн',
     priceNote: 'за 1 годину зйомки',
+    bgImage: '/packages/pack1/1.jpg',
     features: [
       'Допомога в підборі локації',
       'Формування образів в одному стилі та кольоровій гамі — з власного гардеробу або оренда образів у Києві',
@@ -102,6 +105,7 @@ export const packages: ServicePackage[] = [
     desc: 'Лав сторі, мама й дитина, подружки. У кадрі — 2 людини.',
     price: '4 000 грн',
     priceNote: 'за 1 годину зйомки',
+    bgImage: '/packages/pack2/5.jpg',
     features: [
       'Допомога в підборі локації',
       'Формування образів в одному стилі та кольоровій гамі — з власного гардеробу або оренда образів у Києві',
@@ -120,6 +124,7 @@ export const packages: ServicePackage[] = [
     desc: 'До 5 осіб у кадрі.',
     price: '4 000 грн',
     priceNote: 'за 1 годину зйомки',
+    bgImage: '/packages/pack3/3.jpg',
     features: [
       'Допомога в підборі локації',
       'Формування образів в одному стилі та кольоровій гамі — з власного гардеробу або оренда образів у Києві',
@@ -140,6 +145,7 @@ export const packages: ServicePackage[] = [
     price: '4 500 грн',
     priceNote: 'за зйомку',
     featured: true,
+    bgImage: '/packages/pack4/5.jpg',
     features: [
       'Зйомка самого процесу таїнства',
       'Вводини мами в храм',
@@ -158,6 +164,7 @@ export const packages: ServicePackage[] = [
     desc: '1 година зйомки.',
     price: '4 000 грн',
     priceNote: 'за зйомку',
+    bgImage: '/packages/wedding/7.jpg',
     features: [
       'Фото розпису',
       'Фото біля РАЦСу — з рідними та пари',
@@ -172,6 +179,7 @@ export const packages: ServicePackage[] = [
     desc: '2 години зйомки.',
     price: '7 000 грн',
     priceNote: 'за зйомку',
+    bgImage: '/packages/wedding/7.jpg',
     features: [
       'Фото розпису',
       'Фото біля РАЦСу з рідними',
