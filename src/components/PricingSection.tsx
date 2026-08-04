@@ -4,7 +4,16 @@ import Button from './Button'
 import { CONTACT_URL, packages } from '../data'
 import type { ServicePackage } from '../data'
 
-function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
+function PackageCard({
+  pack,
+  delay,
+  compact,
+}: {
+  pack: ServicePackage
+  delay: string
+  /** Tighter spacing for the longer top-row cards so both rows match */
+  compact?: boolean
+}) {
   const { ref, inView } = useInViewAnimation<HTMLDivElement>()
   // The featured package is highlighted with a warm beige card
   const featured = pack.featured
@@ -12,7 +21,9 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
   return (
     <div
       ref={ref}
-      className={`relative flex flex-col rounded-[40px] px-8 md:px-10 pt-8 pb-8 ${
+      className={`relative flex flex-col rounded-[40px] px-8 md:px-10 ${
+        compact ? 'pt-6 pb-6' : 'pt-8 pb-8'
+      } ${
         featured
           ? 'bg-[#EFE3D0] shadow-[0_4px_20px_rgba(93,72,42,0.16)]'
           : 'bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)]'
@@ -50,24 +61,40 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
       <div className="relative z-10 flex flex-col flex-1">
       <h3 className="text-[22px] font-medium text-[#0D212C]">{pack.name}</h3>
       {pack.desc && (
-        <p className="mt-2 text-sm leading-relaxed text-[#273C46]">
+        <p
+          className={`${compact ? 'mt-1.5 text-[13px]' : 'mt-2 text-sm'} leading-relaxed text-[#273C46]`}
+        >
           {pack.desc}
         </p>
       )}
 
-      <p className="mt-6 text-2xl font-medium text-[#0D212C]">{pack.price}</p>
-      <p className="text-sm text-[#273C46]">{pack.priceNote}</p>
+      <p
+        className={`${compact ? 'mt-4' : 'mt-6'} text-2xl font-medium text-[#0D212C]`}
+      >
+        {pack.price}
+      </p>
+      <p className={`${compact ? 'text-[13px]' : 'text-sm'} text-[#273C46]`}>
+        {pack.priceNote}
+      </p>
 
-      <ul className="mt-5 flex flex-col gap-2">
+      <ul
+        className={`flex flex-col ${compact ? 'mt-4 gap-1.5' : 'mt-5 gap-2'}`}
+      >
         {pack.features.map((f) => (
           <li key={f} className="flex items-start gap-3">
             <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#0D212C]" />
-            <span className="text-sm leading-snug text-[#273C46]">{f}</span>
+            <span
+              className={`${compact ? 'text-[13px] leading-tight' : 'text-sm leading-snug'} text-[#273C46]`}
+            >
+              {f}
+            </span>
           </li>
         ))}
       </ul>
 
-      <div className="mt-auto pt-6 flex flex-col gap-3">
+      <div
+        className={`mt-auto ${compact ? 'pt-5' : 'pt-6'} flex flex-col gap-3`}
+      >
         <Button
           href={CONTACT_URL}
           external
@@ -116,6 +143,7 @@ export default function PricingSection() {
               key={pack.name}
               pack={pack}
               delay={`${0.1 + (i % 3) * 0.1}s`}
+              compact={i < 3}
             />
           ))}
         </div>

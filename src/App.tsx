@@ -42,7 +42,7 @@ function Hero() {
         className={`font-mono text-xs md:text-sm text-[#051A24] mb-2 ${anim}`}
         style={{ animationDelay: '0.2s' }}
       >
-        Фотографка · Київ
+        Фотографка · Київ та область
       </p>
 
       <h2
