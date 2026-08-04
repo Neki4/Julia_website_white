@@ -6,19 +6,20 @@ import type { ServicePackage } from '../data'
 
 function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
   const { ref, inView } = useInViewAnimation<HTMLDivElement>()
-  const dark = pack.featured
+  // The featured package is highlighted with a warm beige card
+  const featured = pack.featured
 
   return (
     <div
       ref={ref}
       className={`relative flex flex-col rounded-[40px] px-8 md:px-10 pt-10 pb-10 ${
-        dark
-          ? 'bg-[#051A24] shadow-[inset_0_2px_12px_rgba(255,255,255,0.08)]'
+        featured
+          ? 'bg-[#EFE3D0] shadow-[0_4px_20px_rgba(93,72,42,0.16)]'
           : 'bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)]'
       } ${inView ? 'animate-fade-in-up' : 'opacity-0'}`}
       style={{ animationDelay: delay }}
     >
-      {pack.featured && (
+      {featured && (
         <span className="absolute z-20 -top-3 left-10 rounded-full bg-[#051A24] px-4 py-1 text-xs font-semibold uppercase tracking-wide text-[#F6FCFF] shadow-[0_0_0_0.5px_rgba(0,0,0,0.05),0_4px_16px_rgba(0,0,0,0.15)]">
           Найпопулярніший
         </span>
@@ -34,12 +35,12 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
             src={pack.bgImage}
             alt=""
             loading="lazy"
-            className="w-full h-full object-cover object-top opacity-[0.28]"
+            className="w-full h-full object-cover object-top opacity-[0.56]"
           />
           <div
             className={`absolute inset-0 ${
-              dark
-                ? 'bg-gradient-to-b from-[#051A24]/45 via-[#051A24]/35 to-[#051A24]/55'
+              featured
+                ? 'bg-gradient-to-b from-[#EFE3D0]/50 via-[#EFE3D0]/40 to-[#EFE3D0]/60'
                 : 'bg-gradient-to-b from-white/45 via-white/35 to-white/55'
             }`}
           />
@@ -48,20 +49,20 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
 
       <div className="relative z-10 flex flex-col flex-1">
       <h3
-        className={`text-[22px] font-medium ${dark ? 'text-[#F6FCFF]' : 'text-[#0D212C]'}`}
+        className={`text-[22px] font-medium text-[#0D212C]`}
       >
         {pack.name}
       </h3>
       {pack.desc && (
-        <p className={`mt-2 text-sm leading-relaxed ${dark ? 'text-[#E0EBF0]' : 'text-[#273C46]'}`}>
+        <p className={`mt-2 text-sm leading-relaxed text-[#273C46]`}>
           {pack.desc}
         </p>
       )}
 
-      <p className={`mt-6 text-2xl font-medium ${dark ? 'text-[#F6FCFF]' : 'text-[#0D212C]'}`}>
+      <p className={`mt-6 text-2xl font-medium text-[#0D212C]`}>
         {pack.price}
       </p>
-      <p className={`text-sm ${dark ? 'text-[#E0EBF0]' : 'text-[#273C46]'}`}>
+      <p className={`text-sm text-[#273C46]`}>
         {pack.priceNote}
       </p>
 
@@ -69,10 +70,10 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
         {pack.features.map((f) => (
           <li key={f} className="flex items-start gap-3">
             <Check
-              className={`mt-0.5 h-4 w-4 shrink-0 ${dark ? 'text-[#E0EBF0]' : 'text-[#0D212C]'}`}
+              className="mt-0.5 h-4 w-4 shrink-0 text-[#0D212C]"
             />
             <span
-              className={`text-sm leading-relaxed ${dark ? 'text-[#E0EBF0]' : 'text-[#273C46]'}`}
+              className={`text-sm leading-relaxed text-[#273C46]`}
             >
               {f}
             </span>
@@ -84,7 +85,7 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
         <Button
           href={CONTACT_URL}
           external
-          variant={dark ? 'primary' : 'tertiary'}
+          variant={featured ? 'primary' : 'tertiary'}
           className="w-full"
         >
           Написати мені
