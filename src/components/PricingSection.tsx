@@ -48,25 +48,21 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
       )}
 
       <div className="relative z-10 flex flex-col flex-1">
-      <h3 className="text-[26px] font-semibold text-[#051A24]">{pack.name}</h3>
+      <h3 className="text-[22px] font-medium text-[#0D212C]">{pack.name}</h3>
       {pack.desc && (
-        <p className="mt-2 text-base leading-relaxed text-[#0D212C]">
+        <p className="mt-2 text-sm leading-relaxed text-[#273C46]">
           {pack.desc}
         </p>
       )}
 
-      <p className="mt-6 text-[28px] font-semibold text-[#051A24]">
-        {pack.price}
-      </p>
-      <p className="text-base text-[#0D212C]">{pack.priceNote}</p>
+      <p className="mt-6 text-2xl font-medium text-[#0D212C]">{pack.price}</p>
+      <p className="text-sm text-[#273C46]">{pack.priceNote}</p>
 
       <ul className="mt-6 flex flex-col gap-3">
         {pack.features.map((f) => (
           <li key={f} className="flex items-start gap-3">
-            <Check className="mt-1 h-4 w-4 shrink-0 text-[#051A24]" />
-            <span className="text-base leading-relaxed text-[#0D212C]">
-              {f}
-            </span>
+            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#0D212C]" />
+            <span className="text-sm leading-relaxed text-[#273C46]">{f}</span>
           </li>
         ))}
       </ul>
