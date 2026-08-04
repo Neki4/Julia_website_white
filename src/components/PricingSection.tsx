@@ -12,7 +12,7 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
   return (
     <div
       ref={ref}
-      className={`relative flex flex-col rounded-[40px] px-8 md:px-10 pt-10 pb-10 ${
+      className={`relative flex flex-col rounded-[40px] px-8 md:px-10 pt-8 pb-8 ${
         featured
           ? 'bg-[#EFE3D0] shadow-[0_4px_20px_rgba(93,72,42,0.16)]'
           : 'bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)]'
@@ -58,16 +58,16 @@ function PackageCard({ pack, delay }: { pack: ServicePackage; delay: string }) {
       <p className="mt-6 text-2xl font-medium text-[#0D212C]">{pack.price}</p>
       <p className="text-sm text-[#273C46]">{pack.priceNote}</p>
 
-      <ul className="mt-6 flex flex-col gap-3">
+      <ul className="mt-5 flex flex-col gap-2">
         {pack.features.map((f) => (
           <li key={f} className="flex items-start gap-3">
             <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#0D212C]" />
-            <span className="text-sm leading-relaxed text-[#273C46]">{f}</span>
+            <span className="text-sm leading-snug text-[#273C46]">{f}</span>
           </li>
         ))}
       </ul>
 
-      <div className="mt-auto pt-8 flex flex-col gap-3">
+      <div className="mt-auto pt-6 flex flex-col gap-3">
         <Button
           href={CONTACT_URL}
           external
